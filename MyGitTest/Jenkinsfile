@@ -33,11 +33,6 @@ pipeline {
             }
         }
 
-        stage('Deploy to Test Env') {
-            steps {
-                // Assuming your deploy script is inside MyGitTest\deploy folder
-                bat 'cd MyGitTest && deploy\\deploy.bat'
-            }
-        }
     }
 }
+
