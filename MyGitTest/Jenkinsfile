@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven 3'  // Must match name configured in Jenkins
+        jdk 'JDK 1.8'    // Must match name in Jenkins config
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/sunkuabenay-k/Day-15-10-2025-MyGitTest.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'  // use bat for Windows agent: bat 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'  // or bat 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'  // or bat 'mvn package'
+            }
+        }
+        stage('Deploy to Test Env') {
+		    steps {
+		        bat 'deploy\\deploy.bat'  // or sh 'deploy/deploy.sh'
+		    }
+		}
+
+    }
+}
