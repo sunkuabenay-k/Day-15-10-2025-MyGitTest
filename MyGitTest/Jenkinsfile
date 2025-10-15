@@ -7,11 +7,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/sunkuabenay-k/Day-15-10-2025-MyGitTest.git'
-            }
-        }
+		stage('Checkout') {
+		    steps {
+		        git branch: 'main', url: 'https://github.com/sunkuabenay-k/Day-15-10-2025-MyGitTest.git'
+		    }
+		}
+
 
         stage('Build') {
             steps {
@@ -38,4 +39,5 @@ pipeline {
 
     }
 }
+
 
