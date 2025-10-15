@@ -2,38 +2,41 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9.11'  // Must match name configured in Jenkins
-        jdk 'jdk-21'           // Must match name in Jenkins config
+        maven 'Maven 3.9.11'  // Use the Maven version configured in Jenkins
+        jdk 'jdk-21'          // Use the JDK version configured in Jenkins
     }
 
     stages {
         stage('Checkout') {
             steps {
+                // Checkout the entire repo
                 git branch: 'main', url: 'https://github.com/sunkuabenay-k/Day-15-10-2025-MyGitTest.git'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                // Change directory to MyGitTest before running Maven commands
+                bat 'cd MyGitTest && mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat 'cd MyGitTest && mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
+                bat 'cd MyGitTest && mvn package'
             }
         }
 
         stage('Deploy to Test Env') {
             steps {
-                bat 'deploy\\deploy.bat'
+                // Assuming your deploy script is inside MyGitTest\deploy folder
+                bat 'cd MyGitTest && deploy\\deploy.bat'
             }
         }
     }
